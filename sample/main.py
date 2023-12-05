@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMessageBox, QStatusBar
 from PyQt5 import uic
 
 
@@ -25,6 +25,10 @@ class Test:
         self.serial = None
         self.ui.textBrowser.setPlainText('未连接')
         self.ui.pushButton.setEnabled(False)
+        self.statusBar = QStatusBar()
+        self.ui.setStatusBar(self.statusBar)
+        self.statusBar.showMessage("当前未连接")
+
 
     def disconnect(self):
         self.ui.textBrowser.setPlainText('未连接')
@@ -33,6 +37,7 @@ class Test:
         self.ui.pushButton_2.setEnabled(True)
         self.ui.pushButton_3.setEnabled(True)
         self.serial = None
+        self.statusBar.showMessage("当前未连接")
 
     def serial_connect(self):
         serial_no = self.ui.lineEdit_1.text()
@@ -64,6 +69,7 @@ class Test:
             self.ui.pushButton_3.setEnabled(False)
             self.ui.pushButton.setEnabled(True)
             self.serial = 'ok'
+            self.statusBar.showMessage("已建立连接")
         else:
             self.ui.textBrowser.setPlainText('连接失败...')
 
@@ -103,6 +109,7 @@ class Test:
             self.ui.pushButton_3.setEnabled(False)
             self.ui.pushButton.setEnabled(True)
             self.serial = 'ok'
+            self.statusBar.showMessage("已建立连接")
         else:
             self.ui.textBrowser.setPlainText('连接失败...')
 
